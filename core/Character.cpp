@@ -3,6 +3,9 @@
 #include "DARTHelper.h"
 #include "Muscle.h"
 #include <tinyxml.h>
+#include <stdio.h>
+#include <dart/gui/gui.hpp>
+#include <dart/utils/urdf/urdf.hpp>
 using namespace dart;
 using namespace dart::dynamics;
 using namespace MASS;
@@ -12,6 +15,69 @@ Character()
 {
 
 }
+
+void
+Character::
+LoadExofromUrdf(const std::string& path,bool create_obj)
+{
+	if(path.substr(path.size()-5,5) == ".urdf") {
+		dart::utils::DartLoader loader; // load .urdf file
+		mExo = loader.parseSkeleton(path); //the name shall be loaded inside
+		mExo->setName("Hip_Exoskeleton");
+		// std::cout << "skel_name:  " << mExo->getNumDofs() << std::endl;    
+		}
+
+	else {
+		throw std::runtime_error("do not know how to load skeleton " + path);
+	}
+
+   
+    mExodof = mExo->getNumDofs();
+	mExoJoints = mExo->getNumJoints();
+	mExobodynodes = mExo->getNumBodyNodes();
+	mhumanbodynodes=0;
+	std::cout << "[DEBUG] mExo body nodes: " << mExo->getNumBodyNodes() << std::endl;
+
+}
+
+
+
+void
+Character::
+MergeHumanandExo()
+{
+	bool mergesuccess = false;
+	mergesuccess = mExo->getRootBodyNode()->moveTo<dart::dynamics::WeldJoint>(mSkeleton, mSkeleton->getRootBodyNode());
+	Joint* parentJoint = mSkeleton->getBodyNode("exo_waist")->getParentJoint();
+	Eigen::Isometry3d T = parentJoint->getTransformFromParentBodyNode();
+	T.linear() = T.linear()* R_y(-90);
+	T.linear() = T.linear()* R_x(-3);
+	// T.translation()(0) = T.translation()(0)+0.013;
+	T.translation()(1) = T.translation()(1)+0.1;
+	T.translation()(2) = T.translation()(2)+0.0;
+
+	parentJoint->setTransformFromParentBodyNode(T);  
+	if (mergesuccess ==false)
+	{
+		throw std::runtime_error("Something Wrong in Merge");
+	}
+}
+
+void Character::AlignExoToHuman(const Eigen::Vector3d& trans, const Eigen::Vector3d& rot_deg)
+{
+	auto freeJoint = dynamic_cast<dart::dynamics::FreeJoint*>(mExo->getJoint(0));
+	if (!freeJoint) return;
+
+	Eigen::Matrix3d rot = R_z(rot_deg[2]) * R_y(rot_deg[1]) * R_x(rot_deg[0]);
+	Eigen::Vector6d pose;
+	pose.head<3>() = trans;
+	pose.tail<3>() = rot.eulerAngles(2, 1, 0);  // ZYX
+	freeJoint->setPositions(pose);
+}
+
+
+
+
 
 void
 Character::

@@ -90,6 +90,13 @@ Initialize(const std::string& meta_file,bool load_obj)
 			this->SetRewardParameters(a,b,c,d);
 
 		}
+		else if(!index.compare("exo_file")){
+			std::string str2;                                                               //read skel_file
+			ss>>str2;
+			character->LoadExofromUrdf(std::string(MASS_ROOT_DIR)+str2,load_obj);
+			mUseExo= true;
+			// character->AlignExoToHuman();
+		}
 
 
 	}
@@ -99,6 +106,7 @@ Initialize(const std::string& meta_file,bool load_obj)
 	double kp = 300.0;
 	character->SetPDParameters(kp,sqrt(2*kp));
 	this->SetCharacter(character);
+
 	this->SetGround(MASS::BuildFromFile(std::string(MASS_ROOT_DIR)+std::string("/data/ground.xml")));
 
 	this->Initialize();
@@ -131,10 +139,13 @@ Initialize()
 		mCurrentMuscleTuple.tau_des = Eigen::VectorXd::Zero(mNumActiveDof);
 		mActivationLevels = Eigen::VectorXd::Zero(mCharacter->GetMuscles().size());
 	}
+	// mCharacter->MergeHumanandExo();
+
 	mWorld->setGravity(Eigen::Vector3d(0,-9.8,0.0));
 	mWorld->setTimeStep(1.0/mSimulationHz);
 	mWorld->getConstraintSolver()->setCollisionDetector(dart::collision::BulletCollisionDetector::create());
 	mWorld->addSkeleton(mCharacter->GetSkeleton());
+	mWorld->addSkeleton(mCharacter->GetExoSkeleton());
 	mWorld->addSkeleton(mGround);
 	mAction = Eigen::VectorXd::Zero(mNumActiveDof);
 	
@@ -310,9 +321,9 @@ GetState()
 	}
 	
 	v.tail<3>() = root->getCOMLinearVelocity();
-
+	double mPhaseScale = 1.5; // 默认 1x 步态速度
 	double t_phase = mCharacter->GetBVH()->GetMaxTime();
-	double phi = std::fmod(mWorld->getTime(),t_phase)/t_phase;
+	double phi = std::fmod(mWorld->getTime() * mPhaseScale, t_phase) / t_phase;
 
 	p *= 0.8;
 	v *= 0.2;

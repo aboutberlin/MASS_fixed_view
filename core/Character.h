@@ -28,8 +28,14 @@ public:
 	const std::vector<Muscle*>& GetMuscles() {return mMuscles;}
 	const std::vector<dart::dynamics::BodyNode*>& GetEndEffectors(){return mEndEffectors;}
 	BVH* GetBVH(){return mBVH;}
+	void MergeHumanandExo();
+	void AlignExoToHuman(const Eigen::Vector3d& trans, const Eigen::Vector3d& rot_deg);
+
+	void LoadExofromUrdf(const std::string& path,bool create_obj=false);
+
 public:
 	dart::dynamics::SkeletonPtr mSkeleton;
+	dart::dynamics::SkeletonPtr GetExoSkeleton() const { return mExo; }
 	BVH* mBVH;
 	Eigen::Isometry3d mTc;
 
@@ -37,6 +43,15 @@ public:
 	std::vector<dart::dynamics::BodyNode*> mEndEffectors;
 
 	Eigen::VectorXd mKp, mKv;
+
+	// Character.h 中，加入以下成员变量声明
+	dart::dynamics::SkeletonPtr mExo;
+
+	int mExodof;
+	int mExoJoints;
+	int mExobodynodes;
+	int mhumanbodynodes;
+
 
 };
 };

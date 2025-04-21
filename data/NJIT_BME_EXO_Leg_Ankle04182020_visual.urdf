@@ -1,0 +1,1115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name = "KneedCompassGait">
+	<link name = "exo_pelvis">
+		<inertial>
+			<origin xyz="0.164969 -0.016465 -0.00031201" rpy="0 0 0"/>
+			<mass value = "3.40529" />
+			<inertia ixx="0.108005" ixy="0.00342849" ixz="0.00011722" iyy ="0.140273" iyz ="-6.056e-05" izz="0.0409718" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/exo_pelvis_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "exo_femur_r">
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/exo_femur_r_merged_geom.stl"/>
+			</geometry>
+		</visual>
+		<inertial>
+			<origin xyz="-0.00012287 -0.205637 0.0391034" rpy="0 0 0"/>
+			<mass value = "2.77725" />
+			<inertia ixx="0.0378701" ixy="7.8e-05" ixz="-0.00043864" iyy ="0.00419727" iyz ="-0.00038322" izz="0.0353309"/>
+		</inertial>
+	</link>
+
+	<link name = "exo_femur_l">
+		<inertial>
+			<origin xyz="-0.00012287 -0.205637 -0.0391034" rpy="0 0 0"/>
+			<mass value = "2.77725" />
+			<inertia ixx="0.0378701" ixy="7.8e-05" ixz="0.00043864" iyy ="0.00419727" iyz ="0.00038322" izz="0.0353309" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/exo_femur_l_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "Battery">
+		<inertial>
+			<origin xyz="-0.0292753 0.0823604 -0.00041407" rpy="0 0 0"/>
+			<mass value = "2.2" />
+			<inertia ixx="0.00909547" ixy="-0.00038364" ixz="-7.94e-06" iyy ="0.00798838" iyz ="-3.83e-06" izz="0.00423978" />
+		</inertial>
+		<visual>
+			<origin xyz="0.013  0.0255  0.0925" rpy = "-3.14159  -2.01744e-09  1.57159"/>
+			<geometry>
+				<mesh filename="./meshes/battery_holders_1.stl"  scale="0.001  0.001  0.001"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "exo_tibia_r">
+		<inertial>
+			<origin xyz="0.00130324 -0.0640757 0.0163233" rpy="0 0 0"/>
+			<mass value = "0.60426" />
+			<inertia ixx="0.00549709" ixy="-4.48e-05" ixz="-6.27e-06" iyy ="0.00033891" iyz ="-0.00064841" izz="0.00532813" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/exo_tibia_r_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "exo_tibia_l">
+		<inertial>
+			<origin xyz="0.00130324 -0.0640757 -0.0163233" rpy="0 0 0"/>
+			<mass value = "0.60426" />
+			<inertia ixx="0.00549709" ixy="-4.48e-05" ixz="6.27e-06" iyy ="0.00033891" iyz ="0.00064841" izz="0.00532813" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/exo_tibia_l_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "r_shank_support">
+		<inertial>
+			<origin xyz="-0.0220563 -0.0501763 -0.0332489" rpy="0 0 0"/>
+			<mass value = "0.24824" />
+			<inertia ixx="0.0009242" ixy="0.00012989" ixz="-0.00019488" iyy ="0.00070211" iyz ="0.00018796" izz="0.00054663" />
+		</inertial>
+		<visual>
+			<origin xyz="-0.0784998  -0.2475  -0.135" rpy = "0  -0  0"/>
+			<geometry>
+				<mesh filename="./meshes/right-shankSupport.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_shank_support">
+		<inertial>
+			<origin xyz="-0.0220563 -0.0501763 0.0332489" rpy="0 0 0"/>
+			<mass value = "0.24824" />
+			<inertia ixx="0.0009242" ixy="0.00012989" ixz="0.00019488" iyy ="0.00070211" iyz ="-0.00018796" izz="0.00054663" />
+		</inertial>
+		<visual>
+			<origin xyz="-0.0784998  -0.2475  0.135" rpy = "0  -0  0"/>
+			<geometry>
+				<mesh filename="./meshes/right-shanksupport_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_ankle_coupling">
+		<inertial>
+			<origin xyz="0.0270888 -0.0211255 -0.0183098" rpy="0 0 0"/>
+			<mass value = "0.194678" />
+			<inertia ixx="0.00020434" ixy="-0.00019895" ixz="-3.6e-07" iyy ="0.00086131" iyz ="-1.193e-05" izz="0.00083139" />
+		</inertial>
+		<visual>
+			<origin xyz="-0.0784998  -0.1185  -0.135" rpy = "0  -0  0"/>
+			<geometry>
+				<mesh filename="./meshes/right-ankleCoupling.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_PM-universalJoint">
+		<inertial>
+			<origin xyz="0.0149574 0.0007084 0.00071015" rpy="0 0 0"/>
+			<mass value = "0.0185407" />
+			<inertia ixx="2.83e-06" ixy="3e-08" ixz="0" iyy ="4.1e-06" iyz ="1e-08" izz="3.03e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0145  -0.231445  -0.0232013" rpy = "0.0698132  -0  0"/>
+			<geometry>
+				<mesh filename="./meshes/right-PM-universalJoint.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_PL-universalJoint">
+		<inertial>
+			<origin xyz="0.0149574 0.0006754 -0.00118204" rpy="0 0 0"/>
+			<mass value = "0.0185407" />
+			<inertia ixx="2.83e-06" ixy="3e-08" ixz="0" iyy ="4.1e-06" iyz ="-0" izz="3.03e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0145  -0.240513  -0.106482" rpy = "-0.0698132  3.83146e-09  3.33064e-09"/>
+			<geometry>
+				<mesh filename="./meshes/right-PL-universalJoint.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_ankle_coupling">
+		<inertial>
+			<origin xyz="0.0270888 -0.0211255 0.0183098" rpy="0 0 0"/>
+			<mass value = "0.194678" />
+			<inertia ixx="0.00020434" ixy="-0.00019895" ixz="3.6e-07" iyy ="0.00086131" iyz ="1.193e-05" izz="0.00083139" />
+		</inertial>
+		<visual>
+			<origin xyz="-0.0784998  -0.1185  0.135" rpy = "0  -0  0"/>
+			<geometry>
+				<mesh filename="./meshes/right-anklecoupling_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_PM-universalJoint">
+		<inertial>
+			<origin xyz="0.0149574 0.0007084 -0.00071015" rpy="0 0 0"/>
+			<mass value = "0.0185407" />
+			<inertia ixx="2.83e-06" ixy="3e-08" ixz="-0" iyy ="4.1e-06" iyz ="-1e-08" izz="3.03e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0145  -0.231445  0.0232013" rpy = "-0.0698132  3.83146e-09  3.33064e-09"/>
+			<geometry>
+				<mesh filename="./meshes/right-pm-universaljoint_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_PL-universalJoint">
+		<inertial>
+			<origin xyz="0.0149574 0.0006754 0.00118204" rpy="0 0 0"/>
+			<mass value = "0.0185407" />
+			<inertia ixx="2.83e-06" ixy="3e-08" ixz="-0" iyy ="4.1e-06" iyz ="0" izz="3.03e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0145  -0.240513  0.106482" rpy = "0.0698132  -0  0"/>
+			<geometry>
+				<mesh filename="./meshes/right-pl-universaljoint_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_foot">
+		<inertial>
+			<origin xyz="-0.0647188 -0.0863198 0.00643328" rpy="0 0 0"/>
+			<mass value = "1.39879" />
+			<inertia ixx="0.00411567" ixy="0.00314958" ixz="-0.00066379" iyy ="0.0161809" iyz ="-0.00019919" izz="0.0165848" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/r_foot_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "r_PM_motor">
+		<inertial>
+			<origin xyz="-0.0349995 -0.00998801 0.00107767" rpy="0 0 0"/>
+			<mass value = "0.710493" />
+			<inertia ixx="0.00130206" ixy="0.00024557" ixz="2.1e-07" iyy ="0.00053081" iyz ="4.99e-06" izz="0.00149024" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/r_PM_motor_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "r_PL_motor">
+		<inertial>
+			<origin xyz="-0.0349995 -0.00998801 0.00107767" rpy="0 0 0"/>
+			<mass value = "0.710493" />
+			<inertia ixx="0.00130206" ixy="0.00024557" ixz="2.1e-07" iyy ="0.00053081" iyz ="4.99e-06" izz="0.00149024" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/r_PL_motor_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "l_foot">
+		<inertial>
+			<origin xyz="-0.0647188 -0.0863198 -0.00643328" rpy="0 0 0"/>
+			<mass value = "1.39879" />
+			<inertia ixx="0.00411567" ixy="0.00314958" ixz="0.00066379" iyy ="0.0161809" iyz ="0.00019919" izz="0.0165848" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/l_foot_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "l_PM_motor">
+		<inertial>
+			<origin xyz="-0.0349995 -0.00998801 -0.00107767" rpy="0 0 0"/>
+			<mass value = "0.710493" />
+			<inertia ixx="0.00130206" ixy="0.00024557" ixz="-2.1e-07" iyy ="0.00053081" iyz ="-4.99e-06" izz="0.00149024" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/l_PM_motor_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "l_PL_motor">
+		<inertial>
+			<origin xyz="-0.0349995 -0.00998801 -0.00107767" rpy="0 0 0"/>
+			<mass value = "0.710493" />
+			<inertia ixx="0.00130206" ixy="0.00024557" ixz="-2.1e-07" iyy ="0.00053081" iyz ="-4.99e-06" izz="0.00149024" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/l_PL_motor_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "r_foot_end">
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value = "1e-06" />
+			<inertia ixx="0.00010572" ixy="0" ixz="0" iyy ="0.00010572" iyz ="0" izz="0.00010572" />
+		</inertial>
+	</link>
+	<link name = "r_DM_universalJoint">
+		<inertial>
+			<origin xyz="0.0155966 7.195e-05 0.00034455" rpy="0 0 0"/>
+			<mass value = "0.0206009" />
+			<inertia ixx="3e-06" ixy="0" ixz="0" iyy ="4.33e-06" iyz ="2e-08" izz="3.25e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.026041  -0.0339794  -0.0230492" rpy = "0.0872665  -0  0"/>
+			<geometry>
+				<mesh filename="./meshes/right-DM-universalJoint.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_DL_universalJoint">
+		<inertial>
+			<origin xyz="0.0155966 0.0001205 0.00021207" rpy="0 0 0"/>
+			<mass value = "0.0206008" />
+			<inertia ixx="3e-06" ixy="0" ixz="0" iyy ="4.33e-06" iyz ="-2e-08" izz="3.25e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.026041  -0.0452224  -0.10546" rpy = "3.05433  3.14159  3.14159"/>
+			<geometry>
+				<mesh filename="./meshes/right-DL-universalJoint.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_foot_ground">
+		<visual name = "r_foot_end1">
+			<origin xyz="-0.22 0.02 0.04" rpy="0 0 0"/>
+				<geometry>
+					<sphere radius="0.02"/>
+				</geometry>
+				<material name="">
+					<color rgba = "1      0       0  1"/>
+				</material>
+			</visual>
+		<visual name = "r_foot_front1">
+			<origin xyz="0.06 0.02 0.04" rpy="0 0 0"/>
+				<geometry>
+					<sphere radius="0.02"/>
+				</geometry>
+				<material name="">
+					<color rgba = "1      0       0  1"/>
+				</material>
+			</visual>
+
+		<visual name="r_foot_end2">
+		<origin xyz="-0.22 0.02 -0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+				<material name="">
+					<color rgba = "1      0       0  1"/>
+				</material>
+		</visual>
+		<visual name="r_foot_front2">
+		<origin xyz="0.06 0.02 -0.04" rpy="0 0 0"/>
+			<geometry>
+				<sphere radius="0.02"/>
+			</geometry>
+				<material name="">
+					<color rgba = "1      0       0  1"/>
+				</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value = "1e-06" />
+			<inertia ixx="1e-06" ixy="0" ixz="0" iyy ="1e-06" iyz ="-0" izz="1e-06" />
+		</inertial>
+		<collision name="r_foot_end1">
+		<origin xyz="-0.22 0.02 0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+		</collision>
+		<collision name="r_foot_front1">
+		<origin xyz="0.06 0.02 0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+		</collision>
+		<collision name="r_foot_end2">
+		<origin xyz="-0.22 0.02 -0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+		</collision>
+		<collision name="r_foot_front2">
+		<origin xyz="0.06 0.02 -0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name = "r_PM_motor_gear">
+		<inertial>
+			<origin xyz="0.00037476 0.00202995 0.00117121" rpy="0 0 0"/>
+			<mass value = "0.00985698" />
+			<inertia ixx="1.16e-06" ixy="0" ixz="0" iyy ="1.15e-06" iyz ="-0" izz="1.16e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0836022  -0.180128  -0.00820131" rpy = "0.0698132  -3.34235e-09  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-medialMotor-motorGearPulley.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_PM_ballScrewGear">
+		<inertial>
+			<origin xyz="0.00018822 -0.00596056 0.00039574" rpy="0 0 0"/>
+			<mass value = "0.0142379" />
+			<inertia ixx="3.6e-06" ixy="-0" ixz="-0" iyy ="5.18e-06" iyz ="1e-08" izz="2.56e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0286023  -0.180128  -0.0232013" rpy = "0.0698132  -3.34235e-09  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-medialMotor-ballScrewNutPulley.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_PL_motor_gear">
+		<inertial>
+			<origin xyz="0.00038635 0.00184043 -6.847e-05" rpy="0 0 0"/>
+			<mass value = "0.00985698" />
+			<inertia ixx="1.16e-06" ixy="0" ixz="0" iyy ="1.15e-06" iyz ="0" izz="1.16e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0841558  -0.18918  -0.0914818" rpy = "-0.0698132  -3.7297e-10  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-lateralMotor-motorGearPulley.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_PL_ballScrewGear">
+		<inertial>
+			<origin xyz="0.00019033 -0.00599488 -0.00072949" rpy="0 0 0"/>
+			<mass value = "0.0142379" />
+			<inertia ixx="3.6e-06" ixy="-0" ixz="0" iyy ="5.18e-06" iyz ="-1e-08" izz="2.56e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0291559  -0.18918  -0.106482" rpy = "-0.0698132  -3.7297e-10  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-lateralMotor-ballScrewNutPulley.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_foot_end">
+		<inertial>
+			<origin xyz="0 0 -0" rpy="0 0 0"/>
+			<mass value = "1e-06" />
+			<inertia ixx="0.00010572" ixy="0" ixz="-0" iyy ="0.00010572" iyz ="-0" izz="0.00010572" />
+		</inertial>
+	</link>
+	<link name = "l_DM_universalJoint">
+		<inertial>
+			<origin xyz="0.0155966 7.195e-05 -0.00034455" rpy="0 0 0"/>
+			<mass value = "0.0206009" />
+			<inertia ixx="3e-06" ixy="0" ixz="-0" iyy ="4.33e-06" iyz ="-2e-08" izz="3.25e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.026041  -0.0339794  0.0230492" rpy = "-0.0872665  3.889e-09  3.26326e-09"/>
+			<geometry>
+				<mesh filename="./meshes/right-dm-universaljoint_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_DL_universalJoint">
+		<inertial>
+			<origin xyz="0.0155966 0.0001205 -0.00021207" rpy="0 0 0"/>
+			<mass value = "0.0206008" />
+			<inertia ixx="3e-06" ixy="0" ixz="-0" iyy ="4.33e-06" iyz ="2e-08" izz="3.25e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.026041  -0.0452224  0.10546" rpy = "0.0872665  -0  0"/>
+			<geometry>
+				<mesh filename="./meshes/right-dl-universaljoint_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+
+	<link name = "l_foot_ground">
+      <visual name = "l_foot_end1">
+		<origin xyz="-0.22 0.02 0.04" rpy="0 0 0"/>
+			<geometry>
+				<sphere radius="0.02"/>
+			</geometry>
+			<material name="">
+				<color rgba = "1      0       0  1"/>
+			</material>
+		</visual>
+      <visual name = "l_foot_front1">
+		<origin xyz="0.06 0.02 0.04" rpy="0 0 0"/>
+			<geometry>
+				<sphere radius="0.02"/>
+			</geometry>
+			<material name="">
+				<color rgba = "1      0       0  1"/>
+			</material>
+		</visual>
+      <visual name="l_foot_end2">
+		<origin xyz="-0.22 0.02 -0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+				<material name="">
+					<color rgba = "1      0       0  1"/>
+				</material>
+		</visual>
+       <visual name="l_foot_front2">
+		<origin xyz="0.06 0.02 -0.04" rpy="0 0 0"/>
+			<geometry>
+				<sphere radius="0.02"/>
+			</geometry>
+				<material name="">
+					<color rgba = "1      0       0  1"/>
+				</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value = "1e-06" />
+			<inertia ixx="1e-06" ixy="0" ixz="0" iyy ="1e-06" iyz ="-0" izz="1e-06" />
+		</inertial>
+		<collision name="l_foot_end1">
+		<origin xyz="-0.22 0.02 0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+		</collision>
+		<collision name="l_foot_front1">
+		<origin xyz="0.06 0.02 0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+		</collision>
+		<collision name="l_foot_end2">
+		<origin xyz="-0.22 0.02 -0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+		</collision>
+		<collision name="l_foot_front2">
+		<origin xyz="0.06 0.02 -0.04" rpy="0 0 0"/>
+			<geometry>
+			<sphere radius="0.02"/>
+			</geometry>
+		</collision>
+	</link>
+	
+	<link name = "l_PM_motor_gear">
+		<inertial>
+			<origin xyz="0.00037476 0.00202995 -0.00117121" rpy="0 0 0"/>
+			<mass value = "0.00985698" />
+			<inertia ixx="1.16e-06" ixy="0" ixz="-0" iyy ="1.15e-06" iyz ="0" izz="1.16e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0836022  -0.180128  0.00820131" rpy = "-0.0698132  2.37515e-10  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-medialmotor-motorgearpulley_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_PM_ballScrewGear">
+		<inertial>
+			<origin xyz="0.00018822 -0.00596056 -0.00039574" rpy="0 0 0"/>
+			<mass value = "0.0142379" />
+			<inertia ixx="3.6e-06" ixy="-0" ixz="0" iyy ="5.18e-06" iyz ="-1e-08" izz="2.56e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0286023  -0.180128  0.0232013" rpy = "-0.0698132  2.37515e-10  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-medialmotor-ballscrewnutpulley_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_PL_motor_gear">
+		<inertial>
+			<origin xyz="0.00038635 0.00184043 6.847e-05" rpy="0 0 0"/>
+			<mass value = "0.00985698" />
+			<inertia ixx="1.16e-06" ixy="0" ixz="-0" iyy ="1.15e-06" iyz ="-0" izz="1.16e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0841558  -0.189179  0.0914818" rpy = "0.0698132  -2.73187e-09  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-lateralmotor-motorgearpulley_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_PL_ballScrewGear">
+		<inertial>
+			<origin xyz="0.00019033 -0.00599488 0.00072949" rpy="0 0 0"/>
+			<mass value = "0.0142379" />
+			<inertia ixx="3.6e-06" ixy="-0" ixz="-0" iyy ="5.18e-06" iyz ="1e-08" izz="2.56e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0291559  -0.189179  0.106482" rpy = "0.0698132  -2.73187e-09  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-lateralmotor-ballscrewnutpulley_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_DM_ballScrewEnd">
+		<inertial>
+			<origin xyz="0.00013012 0.00788036 0.00054796" rpy="0 0 0"/>
+			<mass value = "0.00876173" />
+			<inertia ixx="1.18e-06" ixy="0" ixz="0" iyy ="5.5e-07" iyz ="-1e-08" izz="1.2e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0280668  -0.0323262  -0.0230492" rpy = "0.0872665  4.92146e-09  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-medialBallScrew-ballScrewEnd.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_DL_ballScrewEnd">
+		<inertial>
+			<origin xyz="0.00012696 0.00793221 5.843e-05" rpy="0 0 0"/>
+			<mass value = "0.00876176" />
+			<inertia ixx="1.18e-06" ixy="0" ixz="-0" iyy ="5.5e-07" iyz ="1e-08" izz="1.2e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0287532  -0.0435483  -0.10546" rpy = "-0.0872665  1.98456e-09  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-lateralBallScrew-ballScrewEnd.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_DM_ballScrewEnd">
+		<inertial>
+			<origin xyz="0.00013012 0.00788036 -0.00054796" rpy="0 0 0"/>
+			<mass value = "0.00876173" />
+			<inertia ixx="1.18e-06" ixy="0" ixz="-0" iyy ="5.5e-07" iyz ="1e-08" izz="1.2e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0280668  -0.0323262  0.0230492" rpy = "-0.0872665  -7.95895e-09  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-medialballscrew-ballscrewend_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_DL_ballScrewEnd">
+		<inertial>
+			<origin xyz="0.00012696 0.00793221 -5.843e-05" rpy="0 0 0"/>
+			<mass value = "0.00876176" />
+			<inertia ixx="1.18e-06" ixy="0" ixz="0" iyy ="5.5e-07" iyz ="-1e-08" izz="1.2e-06" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0287532  -0.0435483  0.10546" rpy = "0.0872665  -5.02205e-09  0.0610865"/>
+			<geometry>
+				<mesh filename="./meshes/right-lateralballscrew-ballscrewend_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_DM_ballScrew">
+		<inertial>
+			<origin xyz="0.00047747 0.120298 0.00037389" rpy="0 0 0"/>
+			<mass value = "0.19714" />
+			<inertia ixx="0.00068018" ixy="-1.82e-06" ixz="-0" iyy ="3.63e-06" iyz ="-5e-08" izz="0.00068019" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/r_DM_ballScrew_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "r_DL_ballScrew">
+		<inertial>
+			<origin xyz="0.00013664 0.120337 0.00013534" rpy="0 0 0"/>
+			<mass value = "0.19714" />
+			<inertia ixx="0.00068019" ixy="9e-08" ixz="-0" iyy ="3.63e-06" iyz ="5.1e-07" izz="0.00068019" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/r_DL_ballScrew_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "l_DM_ballScrew">
+		<inertial>
+			<origin xyz="0.00047747 0.120298 -0.00037389" rpy="0 0 0"/>
+			<mass value = "0.19714" />
+			<inertia ixx="0.00068018" ixy="-1.82e-06" ixz="0" iyy ="3.63e-06" iyz ="5e-08" izz="0.00068019" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/l_DM_ballScrew_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "l_DL_ballScrew">
+		<inertial>
+			<origin xyz="0.00013664 0.120337 -0.00013534" rpy="0 0 0"/>
+			<mass value = "0.19714" />
+			<inertia ixx="0.00068019" ixy="9e-08" ixz="0" iyy ="3.63e-06" iyz ="-5.1e-07" izz="0.00068019" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/l_DL_ballScrew_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "r_DM_ballScrewNut">
+		<inertial>
+			<origin xyz="0.00056724 -0.00759078 0.00037692" rpy="0 0 0"/>
+			<mass value = "0.109522" />
+			<inertia ixx="1.533e-05" ixy="1e-08" ixz="0" iyy ="1.891e-05" iyz ="-0" izz="2.077e-05" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0278986  -0.180333  -0.0222666" rpy = "0.0644105  6.46945e-10  0.0550167"/>
+			<geometry>
+				<mesh filename="./meshes/right-medialMotor-ballScrewNut.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "r_DL_ballScrewNut">
+		<inertial>
+			<origin xyz="0.00013223 -0.00755153 0.00010991" rpy="0 0 0"/>
+			<mass value = "0.109522" />
+			<inertia ixx="1.532e-05" ixy="-0" ixz="-0" iyy ="1.891e-05" iyz ="0" izz="2.077e-05" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0284822  -0.188731  -0.10639" rpy = "-0.066171  1.32764e-09  0.0578315"/>
+			<geometry>
+				<mesh filename="./meshes/right-lateralMotor-ballScrewNut.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_DM_ballScrewNut">
+		<inertial>
+			<origin xyz="0.00056724 -0.00759078 -0.00037692" rpy="0 0 0"/>
+			<mass value = "0.109522" />
+			<inertia ixx="1.533e-05" ixy="1e-08" ixz="-0" iyy ="1.891e-05" iyz ="0" izz="2.077e-05" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0278986  -0.180333  0.0222666" rpy = "-0.0644105  -3.79544e-09  0.0550167"/>
+			<geometry>
+				<mesh filename="./meshes/right-medialmotor-ballscrewnut_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<link name = "l_DL_ballScrewNut">
+		<inertial>
+			<origin xyz="0.00013223 -0.00755153 -0.00010991" rpy="0 0 0"/>
+			<mass value = "0.109522" />
+			<inertia ixx="1.532e-05" ixy="-0" ixz="0" iyy ="1.891e-05" iyz ="-0" izz="2.077e-05" />
+		</inertial>
+		<visual>
+			<origin xyz="0.0284822  -0.188731  0.10639" rpy = "0.066171  -4.45876e-09  0.0578315"/>
+			<geometry>
+				<mesh filename="./meshes/right-lateralmotor-ballscrewnut_mirrored.stl"  scale="0.0254  0.0254  0.0254"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+
+	<joint name="exo_hip_r" type="revolute">
+		<origin xyz="0.25  -0.06  0.21" rpy="0  -0  0"/>
+		<parent link="exo_pelvis"/>
+		<child link="exo_femur_r"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-2.0944" upper="2.0944" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="exo_hip_l" type="revolute">
+		<origin xyz="0.25  -0.06  -0.21" rpy="0  -0  0"/>
+		<parent link="exo_pelvis"/>
+		<child link="exo_femur_l"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-2.0944" upper="2.0944" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="Battery_jnt" type="fixed">
+		<origin xyz="0  0  0" rpy="0  -0  0"/>
+		<parent link="exo_pelvis"/>
+		<child link="Battery"/>
+	</joint>
+	<joint name="exo_knee_r" type="revolute">
+		<origin xyz="0  -0.41  0" rpy="0  -0  0"/>
+		<parent link="exo_femur_r"/>
+		<child link="exo_tibia_r"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-2.0944" upper="1.89533" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="exo_knee_l" type="revolute">
+		<origin xyz="0  -0.41  -0" rpy="0  -0  0"/>
+		<parent link="exo_femur_l"/>
+		<child link="exo_tibia_l"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-2.0944" upper="1.89533" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_shank_support" type="fixed">
+		<origin xyz="0  -0.17  0" rpy="0  -0  0"/>
+		<parent link="exo_tibia_r"/>
+		<child link="r_shank_support"/>
+	</joint>
+	<joint name="l_shank_support" type="fixed">
+		<origin xyz="0  -0.17  0" rpy="0  -0  0"/>
+		<parent link="exo_tibia_l"/>
+		<child link="l_shank_support"/>
+	</joint>
+	<joint name="r_ankle_coupling" type="revolute">
+		<origin xyz="0  -0.129  0" rpy="0  -0  0"/>
+		<parent link="r_shank_support"/>
+		<child link="r_ankle_coupling"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-1.5472" upper="1.5472" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_PM-universalJoint" type="fixed">
+		<origin xyz="-0.0929998  -0.015  -0.128" rpy="0  -0  0"/>
+		<parent link="r_shank_support"/>
+		<child link="r_PM-universalJoint"/>
+		<axis xyz="1  0  0"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_PL-universalJoint" type="fixed">
+		<origin xyz="-0.0929998  -0.015  -0.012" rpy="0  -0  0"/>
+		<parent link="r_shank_support"/>
+		<child link="r_PL-universalJoint"/>
+		<axis xyz="1  0  0"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_ankle_coupling" type="revolute">
+		<origin xyz="0  -0.129  -0" rpy="0  -0  0"/>
+		<parent link="l_shank_support"/>
+		<child link="l_ankle_coupling"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-1.5472" upper="1.5472" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_PM-universalJoint" type="fixed">
+		<origin xyz="-0.0929998  -0.015  0.128" rpy="0  -0  0"/>
+		<parent link="l_shank_support"/>
+		<child link="l_PM-universalJoint"/>
+		<axis xyz="-1  -0  -0"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_PL-universalJoint" type="fixed">
+		<origin xyz="-0.0929998  -0.015  0.012" rpy="0  -0  0"/>
+		<parent link="l_shank_support"/>
+		<child link="l_PL-universalJoint"/>
+		<axis xyz="-1  -0  -0"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_foot" type="fixed">
+		<origin xyz="0.11  0.001  -0.0699999" rpy="0  -0  0.29"/>
+		<parent link="r_ankle_coupling"/>
+		<child link="r_foot"/>
+		<axis xyz="1  0  0"/>
+		<limit lower="-1.0" upper="1.0" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_PM_motor" type="fixed">
+		<origin xyz="0  0  0" rpy="0  -0  0"/>
+		<parent link="r_PM-universalJoint"/>
+		<child link="r_PM_motor"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_PL_motor" type="fixed">
+		<origin xyz="0  0  0" rpy="0  -0  0"/>
+		<parent link="r_PL-universalJoint"/>
+		<child link="r_PL_motor"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_foot" type="fixed">
+		<origin xyz="0.11  0.001  0.0699999" rpy="0  -0  0.29"/>
+		<parent link="l_ankle_coupling"/>
+		<child link="l_foot"/>
+		<axis xyz="-1  -0  -0"/>
+		<limit lower="-1.0" upper="1.0" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_PM_motor" type="fixed">
+		<origin xyz="0  0  -0" rpy="0  -0  0"/>
+		<parent link="l_PM-universalJoint"/>
+		<child link="l_PM_motor"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_PL_motor" type="fixed">
+		<origin xyz="0  0  -0" rpy="0  -0  0"/>
+		<parent link="l_PL-universalJoint"/>
+		<child link="l_PL_motor"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_foot_end" type="fixed">
+		<origin xyz="-0.175  0  0" rpy="0  -0  0"/>
+		<parent link="r_foot"/>
+		<child link="r_foot_end"/>
+	</joint>
+	<joint name="r_DM_universalJoint" type="fixed">
+		<origin xyz="-0.2295  -0.0188  -0.0449999" rpy="3.14159  3.14159  2.85159"/>
+		<parent link="r_foot"/>
+		<child link="r_DM_universalJoint"/>
+		<axis xyz="1  0  0"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_DL_universalJoint" type="fixed">
+		<origin xyz="-0.2295  -0.0188  0.0439999" rpy="3.14159  3.14159  2.85159"/>
+		<parent link="r_foot"/>
+		<child link="r_DL_universalJoint"/>
+		<axis xyz="1  0  0"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_foot_ground" type="fixed">
+		<origin xyz="-0  -0.135  -0" rpy="3.14159  3.14159  2.85159"/>
+		<parent link="r_foot"/>
+		<child link="r_foot_ground"/>
+		<axis xyz="1  0  0"/>
+		<limit lower="-1.0" upper="1.0" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_PM_motor_gear" type="fixed">
+		<origin xyz="-0.0549999  -0.0499999  -0.015" rpy="0  -0  0"/>
+		<parent link="r_PM_motor"/>
+		<child link="r_PM_motor_gear"/>
+		<axis xyz="0  1  0"/>
+		<limit lower="-62.8319" upper="62.8319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_PM_ballScrewGear" type="fixed">
+		<origin xyz="0  -0.0499999  0" rpy="0  -0  0"/>
+		<parent link="r_PM_motor"/>
+		<child link="r_PM_ballScrewGear"/>
+		<axis xyz="0  1  0"/>
+		<limit lower="-62.8319" upper="62.8319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_PL_motor_gear" type="fixed">
+		<origin xyz="-0.0549999  -0.0499999  -0.015" rpy="0  -0  0"/>
+		<parent link="r_PL_motor"/>
+		<child link="r_PL_motor_gear"/>
+		<axis xyz="0  1  0"/>
+		<limit lower="-62.8319" upper="62.8319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_PL_ballScrewGear" type="fixed">
+		<origin xyz="0  -0.0499999  0" rpy="0  -0  0"/>
+		<parent link="r_PL_motor"/>
+		<child link="r_PL_ballScrewGear"/>
+		<axis xyz="0  1  0"/>
+		<limit lower="-62.8319" upper="62.8319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_foot_end" type="fixed">
+		<origin xyz="-0.175  0  -0" rpy="0  -0  0"/>
+		<parent link="l_foot"/>
+		<child link="l_foot_end"/>
+	</joint>
+	<joint name="l_DM_universalJoint" type="fixed">
+		<origin xyz="-0.2295  -0.0188  0.0449999" rpy="3.14159  3.14159  2.85159"/>
+		<parent link="l_foot"/>
+		<child link="l_DM_universalJoint"/>
+		<axis xyz="-1  -0  -0"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_DL_universalJoint" type="fixed">
+		<origin xyz="-0.2295  -0.0188  -0.0439999" rpy="3.14159  3.14159  2.85159"/>
+		<parent link="l_foot"/>
+		<child link="l_DL_universalJoint"/>
+		<axis xyz="-1  -0  -0"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_foot_ground" type="fixed">
+		<origin xyz="-0  -0.135  -0" rpy="3.14159  3.14159  2.85159"/>
+		<parent link="l_foot"/>
+		<child link="l_foot_ground"/>
+		<axis xyz="1  0  0"/>
+        <limit lower="-2.0" upper="2.0" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_PM_motor_gear" type="fixed">
+		<origin xyz="-0.0549999  -0.0499999  0.015" rpy="0  -0  0"/>
+		<parent link="l_PM_motor"/>
+		<child link="l_PM_motor_gear"/>
+		<axis xyz="-0  -1  -0"/>
+		<limit lower="-62.8319" upper="62.8319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_PM_ballScrewGear" type="fixed">
+		<origin xyz="0  -0.0499999  -0" rpy="0  -0  0"/>
+		<parent link="l_PM_motor"/>
+		<child link="l_PM_ballScrewGear"/>
+		<axis xyz="-0  -1  -0"/>
+		<limit lower="-62.8319" upper="62.8319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_PL_motor_gear" type="fixed">
+		<origin xyz="-0.0549999  -0.0499999  0.015" rpy="0  -0  0"/>
+		<parent link="l_PL_motor"/>
+		<child link="l_PL_motor_gear"/>
+		<axis xyz="-0  -1  -0"/>
+		<limit lower="-62.8319" upper="62.8319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_PL_ballScrewGear" type="fixed">
+		<origin xyz="0  -0.0499999  -0" rpy="0  -0  0"/>
+		<parent link="l_PL_motor"/>
+		<child link="l_PL_ballScrewGear"/>
+		<axis xyz="-0  -1  -0"/>
+		<limit lower="-62.8319" upper="62.8319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_DM_ballScrewEnd" type="fixed">
+		<origin xyz="0  0  0" rpy="0  -0  0"/>
+		<parent link="r_DM_universalJoint"/>
+		<child link="r_DM_ballScrewEnd"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_DL_ballScrewEnd" type="fixed">
+		<origin xyz="0  0  0" rpy="0  -0  0"/>
+		<parent link="r_DL_universalJoint"/>
+		<child link="r_DL_ballScrewEnd"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_DM_ballScrewEnd" type="fixed">
+		<origin xyz="0  0  -0" rpy="0  -0  0"/>
+		<parent link="l_DM_universalJoint"/>
+		<child link="l_DM_ballScrewEnd"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_DL_ballScrewEnd" type="fixed">
+		<origin xyz="0  0  -0" rpy="0  -0  0"/>
+		<parent link="l_DL_universalJoint"/>
+		<child link="l_DL_ballScrewEnd"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_DM_ballScrew" type="fixed">
+		<origin xyz="0  0  0" rpy="0  -0  0"/>
+		<parent link="r_DM_ballScrewEnd"/>
+		<child link="r_DM_ballScrew"/>
+	</joint>
+	<joint name="r_DL_ballScrew" type="fixed">
+		<origin xyz="0  0  0" rpy="0  -0  0"/>
+		<parent link="r_DL_ballScrewEnd"/>
+		<child link="r_DL_ballScrew"/>
+	</joint>
+	<joint name="l_DM_ballScrew" type="fixed">
+		<origin xyz="0  0  -0" rpy="0  -0  0"/>
+		<parent link="l_DM_ballScrewEnd"/>
+		<child link="l_DM_ballScrew"/>
+	</joint>
+	<joint name="l_DL_ballScrew" type="fixed">
+		<origin xyz="0  0  -0" rpy="0  -0  0"/>
+		<parent link="l_DL_ballScrewEnd"/>
+		<child link="l_DL_ballScrew"/>
+	</joint>
+	<joint name="r_DM_ballScrewNut" type="fixed">
+		<origin xyz="0  0.14732  0" rpy="0  -0  0"/>
+		<parent link="r_DM_ballScrew"/>
+		<child link="r_DM_ballScrewNut"/>
+		<axis xyz="0  1  0"/>
+		<thread_pitch> 0.5 </thread_pitch>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="r_DL_ballScrewNut" type="fixed">
+		<origin xyz="0  0.14732  0" rpy="0  -0  0"/>
+		<parent link="r_DL_ballScrew"/>
+		<child link="r_DL_ballScrewNut"/>
+		<axis xyz="0  1  0"/>
+		<thread_pitch> 0.5 </thread_pitch>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_DM_ballScrewNut" type="fixed">
+		<origin xyz="0  0.14732  0" rpy="0  -0  0"/>
+		<parent link="l_DM_ballScrew"/>
+		<child link="l_DM_ballScrewNut"/>
+		<axis xyz="0  1  0"/>
+		<thread_pitch> 0.5 </thread_pitch>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="l_DL_ballScrewNut" type="fixed">
+		<origin xyz="0  0.14732  0" rpy="0  -0  0"/>
+		<parent link="l_DL_ballScrew"/>
+		<child link="l_DL_ballScrewNut"/>
+		<axis xyz="0  1  0"/>
+		<thread_pitch> 0.5 </thread_pitch>
+		<limit lower="-6.28319" upper="6.28319" effort="1e2" velocity="1e2"/>
+	</joint>
+</robot>

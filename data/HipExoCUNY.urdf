@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name = "HipExoCUNY">
+	<link name = "ground">
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value = "1e-06" />
+			<inertia ixx="1e-06" ixy="0" ixz="0" iyy ="1e-06" iyz ="0" izz="1e-06" />
+		</inertial>
+	</link>
+	<link name = "exo_waist">
+		<inertial>
+			<origin xyz="-0.0600118 -0.00206722 0" rpy="0 0 0"/>
+			<mass value = "0.731911" />
+			<inertia ixx="0.0144549" ixy="0.00028173" ixz="-1.9e-07" iyy ="0.0152344" iyz ="1.08e-06" izz="0.00200202" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes3/exo_waist_merged_geom.obj"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "exo_actuator_r">
+		<inertial>
+			<origin xyz="-4.534e-05 -0.0639688 0.00108513" rpy="0 0 0"/>
+			<mass value = "0.70726" />
+			<inertia ixx="0.00065704" ixy="-1.16e-06" ixz="3.9e-07" iyy ="0.00061638" iyz ="-2.37e-06" izz="0.00104718" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes3/exo_actuator_r_merged_geom.obj"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "exo_actuator_l">
+		<inertial>
+			<origin xyz="-4.534e-05 -0.0639688 -0.00108513" rpy="0 0 0"/>
+			<mass value = "0.70726" />
+			<inertia ixx="0.00065704" ixy="-1.16e-06" ixz="-3.9e-07" iyy ="0.00061638" iyz ="2.37e-06" izz="0.00104718" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes3/exo_actuator_l_merged_geom.obj"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "exo_leg_r">
+		<inertial>
+			<origin xyz="0.0543229 -0.140052 -0.0191241" rpy="0 0 0"/>
+			<mass value = "0.286" />
+			<inertia ixx="0.00423084" ixy="0.00145023" ixz="0.00036723" iyy ="0.0009974" iyz ="-0.00094217" izz="0.00447581" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes3/exo_leg_r_merged_geom.obj"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "exo_leg_l">
+		<inertial>
+			<origin xyz="0.0543229 -0.140052 0.0191241" rpy="0 0 0"/>
+			<mass value = "0.286" />
+			<inertia ixx="0.00423084" ixy="0.00145023" ixz="-0.00036723" iyy ="0.0009974" iyz ="0.00094217" izz="0.00447581" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes3/exo_leg_l_merged_geom.obj"/>
+			</geometry>
+		</visual>
+	</link>
+	<joint name="ground_exo_waist" type="prismatic">
+		<origin xyz="0  0  0" rpy="0  -0  0"/>
+		<parent link="ground"/>
+		<child link="exo_waist"/>
+		<axis xyz="0.503538  -0.863973  0"/>
+		<limit lower="-1" upper="2" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="exo_hipadd_r" type="revolute">
+		<origin xyz="0  -0.05  0.2165" rpy="0  -0  0"/>
+		<parent link="exo_waist"/>
+		<child link="exo_actuator_r"/>
+		<axis xyz="1  0  0"/>
+		<limit lower="-0.349066" upper="0.349066" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="exo_hipadd_l" type="revolute">
+		<origin xyz="0  -0.05  -0.2165" rpy="0  -0  0"/>
+		<parent link="exo_waist"/>
+		<child link="exo_actuator_l"/>
+		<axis xyz="-1  0  0"/>
+		<limit lower="-0.349066" upper="0.349066" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="exo_hip_flexion_r" type="revolute">
+		<origin xyz="0  -0.065  -0.035" rpy="0  -0  0"/>
+		<parent link="exo_actuator_r"/>
+		<child link="exo_leg_r"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-2.0944" upper="2.0944" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="exo_hip_flexion_l" type="revolute">
+		<origin xyz="0  -0.065  0.035" rpy="0  -0  0"/>
+		<parent link="exo_actuator_l"/>
+		<child link="exo_leg_l"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-2.0944" upper="2.0944" effort="1e2" velocity="1e2"/>
+	</joint>
+</robot>

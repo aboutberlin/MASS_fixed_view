@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name = "KneedCompassGait">
+	<link name = "exo_pelvis">
+		<inertial>
+			<origin xyz="0.164969 -0.016465 -0.00031201" rpy="0 0 0"/>
+			<mass value = "3.40529" />
+			<inertia ixx="0.108005" ixy="0.00342849" ixz="0.00011722" iyy ="0.140273" iyz ="-6.056e-05" izz="0.0409718" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/exo_pelvis_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "exo_femur_r">
+		<inertial>
+			<origin xyz="-0.00012287 -0.205637 0.0391034" rpy="0 0 0"/>
+			<mass value = "2.77725" />
+			<inertia ixx="0.0378701" ixy="7.8e-05" ixz="-0.00043864" iyy ="0.00419727" iyz ="-0.00038322" izz="0.0353309"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/exo_femur_r_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+
+	<link name = "exo_femur_l">
+		<inertial>
+			<origin xyz="-0.00012287 -0.205637 -0.0391034" rpy="0 0 0"/>
+			<mass value = "2.77725" />
+			<inertia ixx="0.0378701" ixy="7.8e-05" ixz="0.00043864" iyy ="0.00419727" iyz ="0.00038322" izz="0.0353309" />
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="./meshes/exo_femur_l_merged_geom.stl"/>
+			</geometry>
+		</visual>
+	</link>
+	<link name = "Battery">
+		<inertial>
+			<origin xyz="-0.0292753 0.0823604 -0.00041407" rpy="0 0 0"/>
+			<mass value = "2.2" />
+			<inertia ixx="0.00909547" ixy="-0.00038364" ixz="-7.94e-06" iyy ="0.00798838" iyz ="-3.83e-06" izz="0.00423978" />
+		</inertial>
+		<visual>
+			<origin xyz="0.013  0.0255  0.0925" rpy = "-3.14159  -2.01744e-09  1.57159"/>
+			<geometry>
+				<mesh filename="./meshes/battery_holders_1.stl"  scale="0.001  0.001  0.001"/>
+			</geometry>
+			<material name="">
+				<color rgba = "0.478431       0.478431       0.478431  1"/>
+			</material>
+		</visual>
+	</link>
+	<joint name="exo_hip_r" type="revolute">
+		<origin xyz="0.25  -0.06  0.21" rpy="0  -0  0"/>
+		<parent link="exo_pelvis"/>
+		<child link="exo_femur_r"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-3.0944" upper="3.0944" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="exo_hip_l" type="revolute">
+		<origin xyz="0.25  -0.06  -0.21" rpy="0  -0  0"/>
+		<parent link="exo_pelvis"/>
+		<child link="exo_femur_l"/>
+		<axis xyz="0  0  1"/>
+		<limit lower="-3.0944" upper="3.0944" effort="1e2" velocity="1e2"/>
+	</joint>
+	<joint name="Battery_jnt" type="fixed">
+		<origin xyz="0  0  0" rpy="0  -0  0"/>
+		<parent link="exo_pelvis"/>
+		<child link="Battery"/>
+	</joint>
+</robot>

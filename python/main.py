@@ -228,7 +228,7 @@ class PPO(object):
 			states = self.env.GetStates()
 		
 	def OptimizeSimulationNN(self):
-		all_transitions = np.array(self.replay_buffer.buffer)
+		all_transitions = np.array(self.replay_buffer.buffer, dtype=object)
 		for j in range(self.num_epochs):
 			np.random.shuffle(all_transitions)
 			for i in range(len(all_transitions)//self.batch_size):
