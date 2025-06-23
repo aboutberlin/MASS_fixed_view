@@ -183,6 +183,7 @@ void
 Environment::
 Step()
 {	
+
 	if(mUseMuscle)
 	{
 		int count = 0;

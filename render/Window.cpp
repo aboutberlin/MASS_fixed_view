@@ -96,7 +96,7 @@ draw()
 	// 奶白色人体
 	DrawSkeleton(mEnv->GetCharacter()->GetSkeleton(), Eigen::Vector4d(0.98, 0.94, 0.88, 1.0));
 
-	// 偏蓝色的外骨骼
+	// //偏蓝色的外骨骼
 	// if (mEnv->UseExo()) {
 	// 	DrawSkeleton(mEnv->GetCharacter()->GetExoSkeleton(), Eigen::Vector4d(0.66, 0.69, 0.70, 1.0));
 	// }
@@ -642,22 +642,22 @@ void Window::DrawMuscles1(const std::vector<Muscle*>& muscles)
     {
 		std::string name = muscle->name;
 		bool keep = std::find(muscle_name_whitelist.begin(), muscle_name_whitelist.end(), name) != muscle_name_whitelist.end();
-		if (!keep)
-			continue;
+		// if (!keep)
+		// 	continue;
 
         auto aps = muscle->GetAnchors();
         double a = muscle->activation;
 
         // 颜色插值：从蓝 (低) -> 橙 (中) -> 红 (高)
-		Eigen::Vector3d base_color(0.5, 0.5, 0.5); // 默认灰色
-		double alpha = a; // 激活度为透明度
+		Eigen::Vector3d base_color(0.75, 0.75, 0.75); // 默认灰色
+		double alpha = 0.6; // 激活度为透明度
 
 		//if (a <= 0.1)
 			//continue; // 跳过显示
 
 		// 颜色分类（手动硬编码）
 		if (name.find("Bicep_Femoris") != std::string::npos)
-			base_color = Eigen::Vector3d(0.2, 0.4, 1.0);  // 蓝紫色
+			base_color = Eigen::Vector3d(0.2, 0.4, 1.0);  // 蓝紫色e 
 		else if (name.find("Rectus_Femoris") != std::string::npos)
 			base_color = Eigen::Vector3d(1.0, 0.7, 0.2);  // 橘黄
 		else if (name.find("Gluteus_Maximus") != std::string::npos)

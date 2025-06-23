@@ -63,16 +63,39 @@ MergeHumanandExo()
 	}
 }
 
-void Character::AlignExoToHuman(const Eigen::Vector3d& trans, const Eigen::Vector3d& rot_deg)
+// ====== 旧函数删掉，换成下面这一版 ======
+void Character::AlignExoToHuman(const Eigen::Vector3d& trans_off,
+	const Eigen::Vector3d& rot_deg)
 {
-	auto freeJoint = dynamic_cast<dart::dynamics::FreeJoint*>(mExo->getJoint(0));
-	if (!freeJoint) return;
+if (!mSkeleton || !mExo) return;
 
-	Eigen::Matrix3d rot = R_z(rot_deg[2]) * R_y(rot_deg[1]) * R_x(rot_deg[0]);
-	Eigen::Vector6d pose;
-	pose.head<3>() = trans;
-	pose.tail<3>() = rot.eulerAngles(2, 1, 0);  // ZYX
-	freeJoint->setPositions(pose);
+// 两棵 Skeleton 的根关节都应是 FreeJoint
+auto humanRoot = dynamic_cast<dart::dynamics::FreeJoint*>(mSkeleton->getJoint(0));
+auto exoRoot   = dynamic_cast<dart::dynamics::FreeJoint*>(mExo->getJoint(0));
+if (!humanRoot || !exoRoot) return;
+
+/* ---------- 复制人体的 6‑DoF 位姿 ---------- */
+Eigen::Vector6d pose_human = humanRoot->getPositions();
+Eigen::Isometry3d T_human  = dart::dynamics::FreeJoint::convertToTransform(pose_human);
+
+/* ---------- 构造用户偏移变换 ---------- */
+Eigen::Isometry3d T_off = Eigen::Isometry3d::Identity();
+T_off.translation() = trans_off;
+
+// 旋转偏移（输入为度，转弧度后按 Z‑Y‑X 乘）
+double rx = rot_deg[0] * M_PI / 180.0;
+double ry = rot_deg[1] * M_PI / 180.0;
+double rz = rot_deg[2] * M_PI / 180.0;
+T_off.linear() = Eigen::AngleAxisd(rz, Eigen::Vector3d::UnitZ()).toRotationMatrix() *
+Eigen::AngleAxisd(ry, Eigen::Vector3d::UnitY()).toRotationMatrix() *
+Eigen::AngleAxisd(rx, Eigen::Vector3d::UnitX()).toRotationMatrix();
+
+/* ---------- 应用偏移并写回外骨骼 ---------- */
+Eigen::Isometry3d T_exo = T_human * T_off;
+Eigen::Vector6d    pose_exo = dart::dynamics::FreeJoint::convertToPositions(T_exo);
+
+exoRoot->setPositions(pose_exo);
+mExo->computeForwardKinematics(true, false, false);
 }
 
 
